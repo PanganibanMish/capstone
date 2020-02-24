@@ -144,21 +144,19 @@ class Welcome extends CI_Controller {
 			$user_id = $this->input->post('user_id');
 			if($result == 0)
 			{
-				$this->session->set_flashdata('message','<div class="card mb-4 py-3 border-left-success">
-											                <div class="card-body">
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
 											            		User was successfully updated.      	
-											                </div>
 											            </div>');
-				redirect('Welcome/Faculty/'.$user_id,'refresh');
+				redirect('Welcome/UpdateFaculty?id='.$user_id,'refresh');
 			}
 			else
 			{
-				$this->session->set_flashdata('message','<div class="card mb-4 py-3 border-left-danger">
-							                <div class="card-body">
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
 							            		Failed in updating user.      	
-							                </div>
 							            </div>');
-				redirect('Welcome/Faculty/'.$user_id,'refresh');
+				redirect('Welcome/UpdateFaculty?id='.$user_id,'refresh');
 			}
 	    }
 	    else

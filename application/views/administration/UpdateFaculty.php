@@ -12,9 +12,9 @@
             foreach ($getUser as $row)
             {
                 $user_id  = $row->user_id;
-                $fullname = $row->fullname;
+                $first_name = $row->first_name;
                 $contact_no = $row->contact_no;
-                $birthday = $row->birthday;
+                $birthday = date_format(date_create($row->birthday), 'Y-m-d');
                 $username = $row->username;
                 $user_type = $row->user_type;
 
@@ -32,8 +32,11 @@
         </ol>
     </section><hr>
     <section class="content">
+         <?php if($this->session->flashdata('message')) { //session na may alert hali sa controller/ ang message declared hali sa controller ?>
+            <?php echo $this->session->flashdata('message'); ?></h5>
+    <?php } ?>
         <div class="row">
-             <div class="col-md-6">
+             <div class="col-md-6 col-md-offset-3">
           <!-- Horizontal Form -->
           <div class="box box-info">
             <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/savechangesFaculty'); ?>">
@@ -41,11 +44,11 @@
                 <div class="form-group">
                   <label for="user_id" class="col-sm-2 control-label">User ID</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value='<?php echo $user_id; ?>'required id="user_id" name="user_id" placeholder="User ID">
+                    <input type="text" readonly class="form-control" value='<?php echo $user_id; ?>'required id="user_id" name="user_id" placeholder="User ID">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="fullname" class="col-sm-2 control-label">Name</label>
+                  <label for="fullname" class="col-sm-2 control-label">First Name</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" value='<?php echo $fullname; ?>' name="fullname" placeholder="Fullname">
         
@@ -79,7 +82,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="submit" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                <button type="submit" class="btn btn-sm btn-primary pull-right">Update</button>
               </div>
               <!-- /.box-footer -->
             </form>
