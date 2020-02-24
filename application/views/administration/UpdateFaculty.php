@@ -25,7 +25,7 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Update Faculty
+            Update Faculty - Lubot mo
         </h1>
         <ol class="breadcrumb">
             <li class="active">Update Faculty</li>
