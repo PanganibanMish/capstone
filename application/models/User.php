@@ -45,7 +45,8 @@ class User extends CI_Model
 	{
 		$data_array = array(
 								'username' => $this->input->post('username'),
-								'fullname' =>$this->input->post('fullname'),
+								'first_name' =>$this->input->post('first_name'),
+								'last_name' =>$this->input->post('last_name'),
 								'contact_no' => $this->input->post('contact_no'),
 								'birthday'  => $this->input->post('birthday'),
 								'user_type'=> $this->input->post('user_type')
@@ -60,5 +61,19 @@ class User extends CI_Model
 	{
 		 $this->db->where('user_id', $user_id);
 		 return $this->db->delete('userlist');
+	}
+	public function addFacultyModel()
+	{
+		$data_array = array(
+								'username' => $this->input->post('username'),
+								'first_name' =>$this->input->post('first_name'),
+								'last_name' =>$this->input->post('last_name'),
+								'contact_no' => $this->input->post('contact_no'),
+								'birthday'  => $this->input->post('birthday'),
+								'user_type'=> $this->input->post('user_type')
+							);
+		if($this->db->insert('userlist', $data_array) == true)
+			return 0;
+		return 1;
 	}
 }

@@ -33,7 +33,7 @@ class Welcome extends CI_Controller {
 				{
 					$session_array = array(
 											'user_id' 		=> $row->user_id, //'user_id' => gibo mo lang yan. Declaration. Dawa ano yan. // $row->user_id, pointer siya. Tgpopoint niya tong column sa database
-											'fullname'	=> $row->fullname,
+											'fullname'	=> $row->first_name." ".$row->last_name,
 											'user_type'		=> $row->user_type
 										);
 					$session_data = $this->session->set_userdata('set_session', $session_array); //$session_array tglalaag mo na sa session.
@@ -170,6 +170,49 @@ class Welcome extends CI_Controller {
 		$id = $this->User->deleteFaculty($user_id);
 
 		redirect('Welcome/faculty','refresh');
+	} 
+	public function createFaculty()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+			$data['getUser'] = $this->User->addFacultyModel();
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/addFaculty'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function addFaculty()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->addFacultyModel();
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Faculty was successfully added.      	
+											            </div>');
+				redirect('Welcome/Faculty', 'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in Adding faculty.      	
+							            </div>');
+				redirect('Welcome/Faculty', 'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
 	} 
 	public function logout()
 	{
