@@ -176,7 +176,6 @@ class Welcome extends CI_Controller {
 		if($session_data = $this->session->userdata('set_session'))
 		{
 			$data['user_session'] = $session_data;
-			$data['getUser'] = $this->User->addFacultyModel();
         	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
         	$this->load->view('administration/addFaculty'); //loads view php files
         	$this->load->view('footer');
