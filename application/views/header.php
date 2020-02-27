@@ -329,7 +329,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="<?php echo site_url('Welcome/Faculty');?>"><i class="fa fa-circle-o"></i>Faculty</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="<?php echo site_url('Welcome/GradeList');?>"><i class="fa fa-circle-o"></i>Grade List</a></li>
           </ul>
         </li>
       </ul>

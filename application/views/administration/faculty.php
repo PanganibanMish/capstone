@@ -61,7 +61,7 @@
                                         echo"<td>".$row->email."</td>";
                                         echo"<td>".$row->date_created."</td>";
                                         echo"<td>".$row->created_by."</td>";
-                                        echo"<td>".$row->modified_date."</td>";
+                                        echo"<td>".$row->date_modified."</td>";
                                         echo"<td>".$row->modified_by."</td>";
                                         echo"<td>".$row->login_first."</td>";
 

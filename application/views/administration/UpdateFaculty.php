@@ -22,7 +22,7 @@
                 $email = $row->email;
                 $date_created = $row->date_created;
                 $created_by = $row->created_by;
-                $modified_date = $row->modified_date;
+                $date_modified = $row->date_modified;
                 $modified_by = $row->modified_by;
                 $login_first = $row->login_first;
             }

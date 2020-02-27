@@ -105,6 +105,8 @@ class Welcome extends CI_Controller {
         	redirect('Welcome','refresh');
         }
 	}
+
+	//Faculty
 	public function Faculty()
 	{
 		if($session_data = $this->session->userdata('set_session')) 
@@ -213,6 +215,116 @@ class Welcome extends CI_Controller {
         	redirect('Welcome','refresh');
         }
 	} 
+
+	//Grade Level
+	public function GradeList()
+	{
+		if($session_data = $this->session->userdata('set_session')) 
+		{
+			$data['user_session'] = $session_data;
+			$data['getGradeList'] = $this->User->get_grade_level(); //hali sa model function na kinukua nya si userlist. Read ni.
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/GradeList'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function createGradeList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/addGradeList'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function addGradeList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->addGradeListModel();
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Grade Level was successfully added.      	
+											            </div>');
+				redirect('Welcome/GradeList', 'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in adding grade level.      	
+							            </div>');
+				redirect('Welcome/GradeList', 'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function updateGradeList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+			$data['getGradeList'] = $this->User->get_grade_list();
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/UpdateGradeList'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function savechangesGradeList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->saveChangesGradeListModel();
+			$grade_id = $this->input->post('grade_id');
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Grade List was successfully updated.      	
+											            </div>');
+				redirect('Welcome/updateGradeList?id='.$grade_id,'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in updating Grade List.      	
+							            </div>');
+				redirect('Welcome/updateGradeList?id='.$grade_id,'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function deleteGradeList()
+	{
+		$grade_id = $this->input->get('id');
+		$id = $this->User->deleteGradeList($grade_id);
+
+		redirect('Welcome/GradeList','refresh');
+	}
 	public function logout()
 	{
 		session_destroy();

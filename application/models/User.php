@@ -8,7 +8,7 @@ class User extends CI_Model
 		$password  = md5($this->input->post('password'));
 		if ($user_type == 'Faculty') {
 
-			$sql = $this->db->query("SELECT * FROM userlist WHERE username = '$username' AND password = '$password' AND status <> '0' ")->result();
+			$sql = $this->db->query("SELECT * FROM user_list WHERE username = '$username' AND password = '$password' AND status <> '0' ")->result();
 		}
 		return $sql;
 	}
@@ -22,7 +22,7 @@ class User extends CI_Model
 						'login_first' => 0
 					); //ini si mga babaguhon sa database
 		$this->db->where('user_id', $user_id); //kung nasain ang hinahanap na data
-		$this->db->update('userlist', $data); //update data
+		$this->db->update('user_list', $data); //update data
 		if($this->db->affected_rows() > 0) //tgchecheck niya kung pirang rows ang nabago sa database
 			return true;
 		else
@@ -31,14 +31,14 @@ class User extends CI_Model
 
 	public function get_user_list()
 	{
-			$sql = $this->db->query("SELECT * FROM userlist")->result(); //kunon mo gabos ning user data sa table na userlist
+			$sql = $this->db->query("SELECT * FROM user_list")->result(); //kunon mo gabos ning user data sa table na userlist
 			return $sql;
 	}
 	
 	public function getFacultyModel()
 	{
 		$user_id = $this->input->get('id');
-		$sql = $this->db->query("SELECT * FROM userlist WHERE user_id = '$user_id'")->result();
+		$sql = $this->db->query("SELECT * FROM user_list WHERE user_id = '$user_id'")->result();
 		return $sql;
 	}
 	public function saveChangesFacultyModel()
@@ -53,14 +53,14 @@ class User extends CI_Model
 							);
 		$user_id = $this->input->post('user_id');
 		$this->db->where('user_id', $user_id);
-		if($this->db->update('userlist', $data_array) == true)
+		if($this->db->update('user_list', $data_array) == true)
 			return 0;
 		return 1;
 	}
 	public function deleteFaculty($user_id)
 	{
 		 $this->db->where('user_id', $user_id);
-		 return $this->db->delete('userlist');
+		 return $this->db->delete('user_list');
 	}
 	public function addFacultyModel()
 	{
@@ -70,10 +70,49 @@ class User extends CI_Model
 								'last_name' =>$this->input->post('last_name'),
 								'contact_no' => $this->input->post('contact_no'),
 								'birthday'  => $this->input->post('birthday'),
-								'user_type'=> $this->input->post('user_type')
+								'user_type'=> $this->input->post('user_type'),
+								'email' => $this->input->post('email')
 							);
-		if($this->db->insert('userlist', $data_array) == true)
+		if($this->db->insert('user_list', $data_array) == true)
 			return 0;
 		return 1;
+	}
+	public function get_grade_level()
+	{
+			$sql = $this->db->query("SELECT * FROM grade_level")->result(); //kunon mo gabos ning user data sa table na userlist
+			return $sql;
+	}
+	public function get_grade_list()
+	{
+		$grade_id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM grade_level WHERE grade_id = '$grade_id'")->result();
+		return $sql;
+	}
+	public function addGradeListModel()
+	{
+		$data_array = array(
+								'grade_name' => $this->input->post('grade_name'),
+								'adviser' =>$this->input->post('adviser')
+							);
+		if($this->db->insert('grade_level', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function saveChangesGradeListModel()
+	{
+		$data_array = array(
+								'grade_name' => $this->input->post('grade_name'),
+								'adviser' =>$this->input->post('adviser')	
+							);
+		$grade_id = $this->input->post('grade_id');
+		$this->db->where('grade_id', $grade_id);
+		if($this->db->update('grade_level', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function deleteGradeList($grade_id)
+	{
+		 $this->db->where('grade_id', $grade_id);
+		 return $this->db->delete('grade_level');
 	}
 }
