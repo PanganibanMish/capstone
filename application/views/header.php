@@ -332,6 +332,18 @@
             <li><a href="<?php echo site_url('Welcome/GradeList');?>"><i class="fa fa-circle-o"></i>Grade List</a></li>
           </ul>
         </li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Student</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="<?php echo site_url('Student/students');?>"><i class="fa fa-circle-o"></i>Student List</a></li>
+            <!-- <li><a href="<?php echo site_url('Welcome/GradeList');?>"><i class="fa fa-circle-o"></i>Grade List</a></li> -->
+          </ul>
+        </li>
       </ul>
     </section>
 </aside>
