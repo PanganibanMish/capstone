@@ -38,6 +38,7 @@
                 <div class="col-sm-6">
                     <label for="section_name" class="col-sm-2 control-label">Section Name</label>
                     <input type="text" class="form-control" value='<?php echo $section_name; ?>' name="section_name" placeholder="Section Name">
+                    <input type="hidden" name="section_id" class="form-control" value='<?php echo $section_id; ?>'>
                   </div>
                   <div class="col-sm-6">
                     <label for="grade_level" class="col-sm-2 control-label">Grade Level</label>
