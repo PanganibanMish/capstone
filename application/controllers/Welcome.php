@@ -325,11 +325,241 @@ class Welcome extends CI_Controller {
 
 		redirect('Welcome/GradeList','refresh');
 	}
+	//Subject List
+	public function SubjectList()
+	{
+		if($session_data = $this->session->userdata('set_session')) 
+		{
+			$data['user_session'] = $session_data;
+			$data['getSubjectList'] = $this->User->get_subject_list(); //hali sa model function na kinukua nya si userlist. Read ni.
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/Subject'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function createSubjectList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/addSubjectList'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function addSubjectList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->addSubjectListModel();
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Subject was successfully added.      	
+											            </div>');
+				redirect('Welcome/SubjectList', 'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in adding Subject.      	
+							            </div>');
+				redirect('Welcome/SubjectList', 'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function updateSubjectList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+			$data['getSubjectList'] = $this->User->get_subject_list();
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/updateSubject'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function savechangesSubject()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->saveChangesSubjectListModel();
+			$subject_id = $this->input->post('subject_id');
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Subject was successfully updated.      	
+											            </div>');
+				redirect('Welcome/updateSubjectList?id='.$subject_id,'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in updating Subject.      	
+							            </div>');
+				redirect('Welcome/updateSubjectList?id='.$subject_id,'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function deleteSubjectList()
+	{
+		$subject_id = $this->input->get('id');
+		$id = $this->User->deleteSubjectList($subject_id);
+
+		redirect('Welcome/SubjectList','refresh');
+	}
+	//Section List
+	public function SectionList()
+	{
+		if($session_data = $this->session->userdata('set_session')) 
+		{
+			$data['user_session'] = $session_data;
+			$data['getSectionList'] = $this->User->get_Section_List(); //hali sa model function na kinukua nya si userlist. Read ni.
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/Section'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        }
+    }
+    public function createSectionList()
+    {
+        if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/addSection'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        }
+    }
+    public function addSection()
+    {
+        if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->addSectionListModel();
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Section was successfully added.      	
+											            </div>');
+				redirect('Welcome/SectionList', 'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in adding Section.      	
+							            </div>');
+				redirect('Welcome/SectionList', 'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function updateSectionList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+			$data['getSectionList'] = $this->User->get_Section_List();
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/UpdateSection'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function savechangesSection()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->saveChangesSectionListModel();
+			$section_id = $this->input->post('section_id');
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Section was successfully updated.      	
+											            </div>');
+				redirect('Welcome/updateSectionList?id='.$section_id,'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in updating Section.      	
+							            </div>');
+				redirect('Welcome/updateSectionList?id='.$section_id,'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function deleteSectionList()
+	{
+		$section_id = $this->input->get('id');
+		$id = $this->User->deleteSectionList($section_id);
+
+		redirect('Welcome/SectionList','refresh');
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public function logout()
 	{
 		session_destroy();
 		redirect('Welcome','refresh');
 	}
-
-
 }

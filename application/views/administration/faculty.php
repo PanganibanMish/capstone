@@ -41,7 +41,7 @@
                         {
                             foreach ($getUser as $row)
                             {
-                                if($row->user_type == '1')
+                              if($row->user_type == '1')
                                     $user_type = 'Director';
                                 else if($row->user_type == '2')
                                     $user_type = 'Registrar';
@@ -51,6 +51,7 @@
                                     $user_type = 'Principal';
                                 else 
                                     $user_type = 'Teacher';
+                               
                                 echo "<tr>";
                                         echo"<td>".$row->user_id."</td>";
                                         echo "<td>".$row->last_name." ".$row->first_name.", ".$row->middle_name."</td>";

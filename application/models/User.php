@@ -115,4 +115,80 @@ class User extends CI_Model
 		 $this->db->where('grade_id', $grade_id);
 		 return $this->db->delete('grade_level');
 	}
+	public function get_subject_list()
+	{
+		$sql = $this->db->query("SELECT * FROM subject")->result(); //kunon mo gabos ning user data sa table na userlist
+			return $sql;
+	}
+	public function get_subject()
+	{
+		$subject_id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM subject WHERE subject_id = '$subject_id'")->result();
+		return $sql;
+	}
+	public function addSubjectListModel()
+	{
+		$data_array = array(
+								'subject_code' => $this->input->post('subject_code'),
+								'subject_name' =>$this->input->post('subject_name')
+							);
+		if($this->db->insert('subject', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function saveChangesSubjectListModel()
+	{
+		$data_array = array(
+								'subject_code' => $this->input->post('subject_code'),
+								'subject_name' =>$this->input->post('subject_name')	
+							);
+		$subject_id = $this->input->post('subject_id');
+		$this->db->where('subject_id', $subject_id);
+		if($this->db->update('subject', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function deleteSubjectList($subject_id)
+	{
+		$this->db->where('subject_id', $subject_id);
+		 return $this->db->delete('subject');
+	}
+	public function get_Section_List()
+	{
+		$sql = $this->db->query("SELECT * FROM section")->result(); //kunon mo gabos ning user data sa table na userlist
+			return $sql;
+	}
+	public function get_Section()
+	{
+		$section_id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM section WHERE section_id = '$section_id'")->result();
+		return $sql;
+	}
+	public function addSectionListModel()
+	{
+		$data_array = array(
+								'section_name' => $this->input->post('section_name'),
+								'grade_level' =>$this->input->post('grade_level')
+							);
+		if($this->db->insert('section', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function saveChangesSectionListModel()
+	{
+		$data_array = array(
+								'section_name' => $this->input->post('section_name'),
+								'grade_level' =>$this->input->post('grade_level')	
+							);
+		$section_id = $this->input->post('section_id');
+		$this->db->where('section_id', $section_id);
+		if($this->db->update('section', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function deleteSectionList($section_id)
+	{
+		$this->db->where('section_id', $section_id);
+		 return $this->db->delete('section');
+	}
 }
