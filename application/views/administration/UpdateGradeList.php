@@ -34,13 +34,27 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label for="grade_name" class="col-sm-1 control-label">Grade Name</label>
+                                    <label class="control-label">Grade Name</label>
                                     <input type="text" class="form-control" value='<?php echo $grade_name; ?>'required id="grade_name" name="grade_name" placeholder="Grade Name">
                                     <input type="hidden" name="grade_id" class="form-control" value='<?php echo $grade_id; ?>'>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="adviser" class="col-sm-1 control-label">Adviser</label>
-                                    <input type="text" class="form-control" value='<?php echo $adviser; ?>'required id="adviser" name="adviser" placeholder="Adviser">
+                                    <select class="form-control" name="adviser">
+                                        <option value="">Select Adviser</option>
+                                        <?php 
+                                            if(!empty($userlist))
+                                            {
+                                                foreach($userlist as $row)
+                                                {
+                                                    if($row->user_id == $adviser)
+                                                        echo"<option selected value='".$row->user_id."'>".$row->first_name." ".$row->last_name."</option>";
+                                                    else
+                                                        echo"<option value='".$row->user_id."'>".$row->first_name." ".$row->last_name."</option>";
+                                                }
+                                            }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>

@@ -18,14 +18,22 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label for="grade_name" class="col-sm-1 control-label">Grade Name</label>
+                                    <label  class="control-label">Grade Name</label>
                                     <input type="text" class="form-control" name="grade_name" placeholder="Grade Name">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="adviser" class="col-sm-1 control-label">Adviser</label>
-                                    <select class="form-control" name="user_id">
+                                    <select class="form-control" name="adviser">
                                         <option value="">Select Adviser</option>
-                                        <option value= "'.$row->lastname.','.$row->lastname.'"></option>
+                                        <?php 
+                                            if(!empty($userlist))
+                                            {
+                                                foreach($userlist as $row)
+                                                {
+                                                    echo"<option value='".$row->user_id."'>".$row->first_name." ".$row->last_name."</option>";
+                                                }
+                                            }
+                                        ?>
                                     </select>
                                 </div>
                             </div>

@@ -236,6 +236,7 @@ class Welcome extends CI_Controller {
 	{
 		if($session_data = $this->session->userdata('set_session'))
 		{
+			$data['userlist'] = $this->User->get_user_list();
 			$data['user_session'] = $session_data;
         	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
         	$this->load->view('administration/addGradeList'); //loads view php files
@@ -251,7 +252,7 @@ class Welcome extends CI_Controller {
 		if($session_data = $this->session->userdata('set_session'))
 		{
 			$data['session'] = $session_data;
-			$result = $this->User->addGradeListModel();
+			$result = $this->User->addGradeListModel($data['session']['user_id']);
 			if($result == 0)
 			{
 				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
@@ -280,6 +281,7 @@ class Welcome extends CI_Controller {
 		{
 			$data['user_session'] = $session_data;
 			$data['getGradeList'] = $this->User->get_grade_list();
+			$data['userlist'] = $this->User->get_user_list();
         	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
         	$this->load->view('administration/UpdateGradeList'); //loads view php files
         	$this->load->view('footer');
@@ -294,7 +296,7 @@ class Welcome extends CI_Controller {
 		if($session_data = $this->session->userdata('set_session'))
 		{
 			$data['session'] = $session_data;
-			$result = $this->User->saveChangesGradeListModel();
+			$result = $this->User->saveChangesGradeListModel($data['session']['user_id']);
 			$grade_id = $this->input->post('grade_id');
 			if($result == 0)
 			{

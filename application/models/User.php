@@ -79,7 +79,7 @@ class User extends CI_Model
 	}
 	public function get_grade_level()
 	{
-			$sql = $this->db->query("SELECT * FROM grade_level")->result(); //kunon mo gabos ning user data sa table na userlist
+			$sql = $this->db->query("SELECT g.*, u.first_name, u.last_name, CONCAT(u2.first_name,' ',u2.last_name) as created_by, CONCAT(u3.first_name,' ',u3.last_name) as modified_by FROM grade_level g LEFT JOIN user_list u ON g.adviser = u.user_id LEFT JOIN user_list u2 ON g.created_by = u2.user_id LEFT JOIN user_list u3 ON g.modified_by = u3.user_id")->result();
 			return $sql;
 	}
 	public function get_grade_list()
@@ -88,21 +88,23 @@ class User extends CI_Model
 		$sql = $this->db->query("SELECT * FROM grade_level WHERE grade_id = '$grade_id'")->result();
 		return $sql;
 	}
-	public function addGradeListModel()
+	public function addGradeListModel($user_id)
 	{
 		$data_array = array(
 								'grade_name' => $this->input->post('grade_name'),
-								'adviser' =>$this->input->post('adviser')
+								'adviser' =>$this->input->post('adviser'),
+								'created_by'=>$user_id
 							);
 		if($this->db->insert('grade_level', $data_array) == true)
 			return 0;
 		return 1;
 	}
-	public function saveChangesGradeListModel()
+	public function saveChangesGradeListModel($user_id)
 	{
 		$data_array = array(
 								'grade_name' => $this->input->post('grade_name'),
-								'adviser' =>$this->input->post('adviser')	
+								'adviser' =>$this->input->post('adviser'),
+								'modified_by'=>$user_id	
 							);
 		$grade_id = $this->input->post('grade_id');
 		$this->db->where('grade_id', $grade_id);
