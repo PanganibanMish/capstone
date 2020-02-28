@@ -4,9 +4,9 @@
     $subject_code = "";
     $subject_name  = "";
   
-        if(!empty($getSubject))
+        if(!empty($getSubjectList))
         {
-            foreach ($getSubject as $row)
+            foreach ($getSubjectList as $row)
             {
                 $subject_id = $row->subject_id;
                 $subject_code = $row->subject_code;
@@ -38,6 +38,7 @@
                 <div class="col-sm-6">
                     <label for="subject_code" class="col-sm-2 control-label">Subject Code</label>
                     <input type="text" class="form-control" value='<?php echo $subject_code; ?>' name="subject_code" placeholder="Subject Code">
+                    <input type="hidden" name="subject_id" class="form-control" value='<?php echo $subject_id; ?>'>
                   </div>
                   <div class="col-sm-6">
                     <label for="subject_name" class="col-sm-2 control-label">Subject Name</label>
