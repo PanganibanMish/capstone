@@ -36,10 +36,14 @@
                         {
                             foreach ($getGradeList as $row)
                             {
-                                
+                                if($row->user_id == 'user_id')
+                                    $user_id = 'user_id';
+                                else 
+                                    $user_id = 'user_id';
+                               
                                         echo"<td>".$row->grade_id."</td>";
                                         echo"<td>".$row->grade_name."</td>";
-                                        echo"<td>".$row->adviser."</td>";
+                                        echo "<td>".$row->last_name.",".$row->first_name."</td>";
                                         echo"<td>".$row->date_created."</td>";
                                         echo"<td>".$row->created_by."</td>";
                                         echo"<td>".$row->date_modified."</td>";

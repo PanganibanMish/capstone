@@ -23,7 +23,10 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="adviser" class="col-sm-1 control-label">Adviser</label>
-                                    <input type="text" class="form-control" name="adviser" placeholder="Adviser">
+                                    <select class="form-control" name="user_id">
+                                        <option value="">Select Adviser</option>
+                                        <option value= "'.$row->lastname.','.$row->lastname.'"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
