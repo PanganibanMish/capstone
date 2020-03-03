@@ -28,27 +28,40 @@
          <?php if($this->session->flashdata('message')) { //session na may alert hali sa controller/ ang message declared hali sa controller ?>
             <?php echo $this->session->flashdata('message'); ?></h5>
     <?php } ?>
-        <div class="box-header with-border">
-             <div class="row">
-          <!-- Horizontal Form -->
-          <div class="col-md-10 mx-auto">
-            <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/savechangesSection'); ?>">
-            <div class="box-body">
-                <div class="form-group row">
-                <div class="col-sm-6">
+     <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/savechangesSection'); ?>">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <div class="col-sm-6">
                     <label for="section_name" class="col-sm-2 control-label">Section Name</label>
                     <input type="text" class="form-control" value='<?php echo $section_name; ?>' name="section_name" placeholder="Section Name">
                     <input type="hidden" name="section_id" class="form-control" value='<?php echo $section_id; ?>'>
                   </div>
                   <div class="col-sm-6">
                     <label for="grade_level" class="col-sm-2 control-label">Grade Level</label>
-                    <input type="text" class="form-control" value='<?php echo $grade_level; ?>' name="grade_level" placeholder="Grade Level">
+                     <select class="form-control" name="grade_level">
+                                        <option value="">Select Grade Level</option>
+                                        <?php 
+                                            if(!empty($getGradeList))
+                                            {
+                                                foreach($getGradeList as $row)
+                                                {
+                                                    if($row->grade_id == $grade_level)
+                                                        echo"<option selected value='".$row->grade_id."'>".$row->grade_level." </option>";
+                                                    else
+                                                        echo"<option value='".$row->grade_id."'>".$row->grade_level."</option>";
+                                                }
+                                            }
+                                        ?>
+                                    </select>
                   </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-sm btn-primary pull-right">Update</button>
+                <button type="submit" class="btn btn-default">CANCEL</button>
+                <button type="submit" class="btn btn-sm btn-primary pull-right">UPDATE</button>
               </div>
               <!-- /.box-footer -->
             </form>

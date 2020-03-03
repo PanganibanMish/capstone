@@ -332,6 +332,7 @@
             <li><a href="<?php echo site_url('Welcome/GradeList');?>"><i class="fa fa-circle-o"></i>Grade List</a></li>
             <li><a href="<?php echo site_url('Welcome/SubjectList');?>"><i class="fa fa-circle-o"></i>Subject List</a></li>
              <li><a href="<?php echo site_url('Welcome/SectionList');?>"><i class="fa fa-circle-o"></i>Section List</a></li>
+             <li><a href="<?php echo site_url('Welcome/AttendanceType');?>"><i class="fa fa-circle-o"></i>Attendance Type</a></li>
           </ul>
         </li>
         <li class="active treeview">

@@ -18,8 +18,8 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label  class="control-label">Grade Name</label>
-                                    <input type="text" class="form-control" name="grade_name" placeholder="Grade Name">
+                                    <label  class="control-label">Grade Level</label>
+                                    <input type="text" class="form-control" name="grade_level" placeholder="Grade Level">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="adviser" class="col-sm-1 control-label">Adviser</label>
@@ -39,8 +39,8 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="reset" class="btn btn-default">Reset</button>
-                            <button type="submit" class="btn btn-sm btn-primary pull-right">Create</button>
+                            <button type="reset" class="btn btn-default">CANCEL</button>
+                            <button type="submit" class="btn btn-sm btn-primary pull-right">CREATE</button>
                         </div>
                     </form>
                 </div>

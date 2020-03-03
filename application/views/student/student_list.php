@@ -280,8 +280,8 @@
                             </div><hr>
                         </div>
                         <div class="box-footer">
-                            <button type="reset" class="btn btn-default">Reset</button>
-                            <button type="submit" class="btn btn-sm btn-primary pull-right">Create</button>
+                            <button type="reset" class="btn btn-default">CANCEL</button>
+                            <button type="submit" class="btn btn-sm btn-primary pull-right">CREATE</button>
                         </div>
                     </form>
                 </div>

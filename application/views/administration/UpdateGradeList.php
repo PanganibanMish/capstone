@@ -1,7 +1,7 @@
 <?php 
 
     $grade_id = "";
-    $grade_name = "";
+    $grade_level = "";
     $adviser = "";
   
         if(!empty($getGradeList))
@@ -9,7 +9,7 @@
             foreach ($getGradeList as $row)
             {
                 $grade_id  = $row->grade_id;
-                $grade_name = $row->grade_name;
+                $grade_level = $row->grade_level;
                 $adviser = $row->adviser;
             }
         }
@@ -17,10 +17,10 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Create Grade Level
+            Update Grade Level
         </h1>
         <ol class="breadcrumb">
-            <li class="active">Create Grade Level</li>
+            <li class="active">Update Grade Level</li>
         </ol>
     </section><hr>
     <section class="content">
@@ -34,8 +34,8 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label class="control-label">Grade Name</label>
-                                    <input type="text" class="form-control" value='<?php echo $grade_name; ?>'required id="grade_name" name="grade_name" placeholder="Grade Name">
+                                    <label class="control-label">Grade Level</label>
+                                    <input type="text" class="form-control" value='<?php echo $grade_level; ?>'required id="grade_level" name="grade_level" placeholder="Grade Level">
                                     <input type="hidden" name="grade_id" class="form-control" value='<?php echo $grade_id; ?>'>
                                 </div>
                                 <div class="col-sm-6">
@@ -59,8 +59,8 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-default">Cancel</button>
-                            <button type="submit" class="btn btn-sm btn-primary pull-right">Update</button>
+                            <button type="submit" class="btn btn-default">CANCEL</button>
+                            <button type="submit" class="btn btn-sm btn-primary pull-right">UPDATE</button>
                         </div>
                     </form>
                 </div>

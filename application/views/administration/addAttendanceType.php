@@ -1,10 +1,10 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Create Subject
+            Create Attendance Type
         </h1>
         <ol class="breadcrumb">
-            <li class="active">Create Subject</li>
+            <li class="active">Create Attendance Type</li>
         </ol>
     </section><hr>
     <section class="content">
@@ -14,16 +14,18 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary">
-                    <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/addSubjectList') ?>">
+                    <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/addAttendanceType') ?>">
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label for="subject_code" class="col-sm-1 control-label">Subject Code</label>
-                                    <input type="text" class="form-control" name="subject_code" placeholder="Subject Code">
+                                    <label for="attendance_name" class="control-label">Attendance Name</label>
+                                    <input type="text" class="form-control" name="attendance_name" 
+                                           placeholder="Attendance Name">
+                                    <input type="hidden" name="id" class="form-control" value='<?php echo $id; ?>'>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="subject_name" class="col-sm-1 control-label">Subject Name</label>
-                                    <input type="text" class="form-control" name="subject_name" placeholder="Subject Name">
+                                    <label for="remarks" class="col-sm-1 control-label">Remarks</label>
+                                    <input type="text" class="form-control" name="remarks" placeholder="Remarks">
                                 </div>
                             </div>
                         </div>

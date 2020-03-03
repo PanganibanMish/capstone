@@ -1,26 +1,26 @@
 <?php 
 
-    $subject_id = "";
-    $subject_code = "";
-    $subject_name  = "";
+    $id = "";
+    $attendance_name = "";
+    $remarks  = "";
   
-        if(!empty($getSubjectList))
+        if(!empty($getAttendanceType))
         {
-            foreach ($getSubjectList as $row)
+            foreach ($getAttendanceType as $row)
             {
-                $subject_id = $row->subject_id;
-                $subject_code = $row->subject_code;
-                $subject_name  = $row->subject_name;
+                $id = $row->id;
+                $attendance_name = $row->attendance_name;
+                $remarks  = $row->remarks;
             }
         }
 ?>
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Update Subject
+            Update Attendance Type
         </h1>
         <ol class="breadcrumb">
-            <li class="active">Update Subject</li>
+            <li class="active">Update Attendance Type</li>
         </ol>
     </section><hr>
     <section class="content">
@@ -30,17 +30,17 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary">
-                  <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/savechangesSubject'); ?>">
+                  <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/savechangesAttendanceType'); ?>">
                     <div class="box-body">
                       <div class="form-group row">
-                        <div class="col-sm-6">
-                      <label for="subject_code" class="control-label">Subject Code</label>
-                      <input type="text" class="form-control" value='<?php echo $subject_code; ?>' name="subject_code" placeholder="Subject Code">
-                      <input type="hidden" name="subject_id" class="form-control" value='<?php echo $subject_id; ?>'>
+                        <div class="col-sm-4">
+                      <label for="attendance_name" class="control-label">Attendance Name</label>
+                      <input type="text" class="form-control" value='<?php echo $attendance_name; ?>' name="attendance_name" placeholder="Attendance Name">
+                      <input type="hidden" name="id" class="form-control" value='<?php echo $id; ?>'>
                   </div>
                   <div class="col-sm-6">
-                    <label for="subject_name" class="control-label">Subject Name</label>
-                    <input type="text" class="form-control" value='<?php echo $subject_name; ?>' name="subject_name" placeholder="Subject Name">
+                    <label for="remarks" class="control-label">Remarks</label>
+                    <input type="text" class="form-control" value='<?php echo $remarks; ?>' name="remarks" placeholder="Remarks">
                   </div>
               </div>
               <!-- /.box-body -->

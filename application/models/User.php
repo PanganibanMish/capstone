@@ -91,7 +91,7 @@ class User extends CI_Model
 	public function addGradeListModel($user_id)
 	{
 		$data_array = array(
-								'grade_name' => $this->input->post('grade_name'),
+								'grade_level' => $this->input->post('grade_level'),
 								'adviser' =>$this->input->post('adviser'),
 								'created_by'=>$user_id
 							);
@@ -102,7 +102,7 @@ class User extends CI_Model
 	public function saveChangesGradeListModel($user_id)
 	{
 		$data_array = array(
-								'grade_name' => $this->input->post('grade_name'),
+								'grade_level' => $this->input->post('grade_level'),
 								'adviser' =>$this->input->post('adviser'),
 								'modified_by'=>$user_id	
 							);
@@ -155,9 +155,10 @@ class User extends CI_Model
 		$this->db->where('subject_id', $subject_id);
 		 return $this->db->delete('subject');
 	}
+
 	public function get_Section_List()
 	{
-		$sql = $this->db->query("SELECT * FROM section")->result(); //kunon mo gabos ning user data sa table na userlist
+			$sql = $this->db->query("SELECT g.*, u.grade_level, CONCAT(u2.grade_level) as created_by, CONCAT(u3.grade_level) as modified_by FROM section g LEFT JOIN grade_level u ON g.grade_level = u.grade_id LEFT JOIN grade_level u2 ON g.created_by = u2.grade_id LEFT JOIN grade_level u3 ON g.modified_by = u3.grade_id")->result();
 			return $sql;
 	}
 	public function get_Section()
@@ -170,7 +171,8 @@ class User extends CI_Model
 	{
 		$data_array = array(
 								'section_name' => $this->input->post('section_name'),
-								'grade_level' =>$this->input->post('grade_level')
+								'grade_level' =>$this->input->post('grade_level'),
+							
 							);
 		if($this->db->insert('section', $data_array) == true)
 			return 0;
@@ -192,5 +194,43 @@ class User extends CI_Model
 	{
 		$this->db->where('section_id', $section_id);
 		 return $this->db->delete('section');
+	}
+	public function get_attendance_type()
+	{
+		$sql = $this->db->query("SELECT * FROM attendance_type")->result(); 
+		return $sql;
+	}
+	public function get_attendance()
+	{
+		$id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM attendance_type WHERE id = '$id'")->result();
+		return $sql;
+	}
+	public function addAttendanceTypeModel()
+	{
+		$data_array = array(
+								'attendance_name' => $this->input->post('attendance_name'),
+								'remarks' =>$this->input->post('remarks')
+							);
+		if($this->db->insert('attendance_type', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function savechangesAttendanceTypeModel()
+	{
+		$data_array = array(
+								'attendance_name' => $this->input->post('attendance_name'),
+								'remarks' =>$this->input->post('remarks')	
+							);
+		$id = $this->input->post('id');
+		$this->db->where('id', $id);
+		if($this->db->update('attendance_type', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function deleteAttendanceType($id)
+	{
+		$this->db->where('id', $id);
+		 return $this->db->delete('attendance_type');
 	}
 }
