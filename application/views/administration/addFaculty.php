@@ -17,38 +17,32 @@
                     <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/addFaculty') ?>">
                         <div class="box-body">
                             <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label for="first_name" class="col-sm-1 control-label">First Name</label>
+                                <div class="col-sm-4">
+                                    <label for="first_name" class="control-label">First Name</label>
                                     <input type="text" class="form-control" name="first_name" placeholder="First Name">
                                 </div>
-                                <div class="col-sm-6">
-                                    <label for="last_name" class="col-sm-1 control-label">Last Name</label>
+                                <div class="col-sm-4">
+                                    <label for="last_name" class="control-label">Last Name</label>
                                     <input type="text" class="form-control" name="last_name" placeholder="Last Name">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label for="middle_name" class="col-sm-1 control-label">Middle Name</label>
+                                <div class="col-sm-4">
+                                    <label for="middle_name" class="control-label">Middle Name</label>
                                     <input type="text" class="form-control" name="middle_name" placeholder="Middle Name">
                                 </div>
-                                <div class="col-sm-6">
-                                  <label for="contact_no" class="col-sm-1 control-label">Contact Number</label>
+                                <div class="col-sm-4">
+                                  <label for="contact_no" class="control-label">Contact Number</label>
                                     <input type="input" class="form-control"required id="contact_no"  name="contact_no" placeholder="Contact Number">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label for="birthday" class="col-sm-1 control-label">Birthday</label>
+                                <div class="col-sm-4">
+                                    <label for="birthday" class="control-label">Birthday</label>
                                     <input type="date" class="form-control"  required id="birthday" name="birthday" placeholder="Birthday">
                                 </div>
-                                <div class="col-sm-6">
-                                    <label for="username" class="col-sm-1 control-label">Username</label>
+                                <div class="col-sm-4">
+                                    <label for="username" class="control-label">Username</label>
                                     <input type="text" class="form-control"  required id="username" name="username" placeholder="Username">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label for="user_type" class="col-sm-1 control-label">User Type</label>
+                                <div class="col-sm-4">
+                                    <label for="user_type" class="control-label">User Type</label>
                                     <select class="form-control" name="user_type">
                                         <option value="">Select type of user</option>
                                         <option value="1">Director</option>
@@ -58,15 +52,15 @@
                                         <option value="5">Teacher</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-6">
-                                    <label for="email" class="col-sm-1 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    <label for="email" class="control-label">Email</label>
                                     <input type="text" class="form-control" required id="email" name="email" placeholder="Email">
                                 </div>
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="reset" class="btn btn-default">Reset</button>
-                            <button type="submit" class="btn btn-sm btn-primary pull-right">Create</button>
+                            <button type="reset" class="btn btn-default">CANCEL</button>
+                            <button type="submit" class="btn btn-sm btn-primary pull-right">CREATE</button>
                         </div>
                     </form>
                 </div>

@@ -66,9 +66,9 @@
                                         echo"<td>".$row->modified_by."</td>";
                                         echo"<td>".$row->login_first."</td>";
 
-                                        echo "<td><a href='".site_url('Welcome/UpdateFaculty?id=').$row->user_id." ' target='_blank' class='btn btn-sm btn-primary'>Update</a></td>";
+                                        echo "<td><a href='".site_url('Welcome/UpdateFaculty?id=').$row->user_id." ' target='_blank' class='btn btn-sm btn-primary'>UPDATE</a></td>";
 
-                                        echo "<td><a href='".site_url('Welcome/deleteFaculty?id=').$row->user_id."' target='_blank' class='btn btn-sm btn-danger'>Delete</a></td>";
+                                        echo "<td><a href='".site_url('Welcome/deleteFaculty?id=').$row->user_id."' target='_blank' class='btn btn-sm btn-danger'>DELETE</a></td>";
                                 echo"</tr>";
                             }
                         }

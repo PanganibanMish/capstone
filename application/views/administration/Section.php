@@ -72,9 +72,9 @@
                                         echo"<td>".$row->date_modified."</td>";
                                         echo"<td>".$row->modified_by."</td>";
 
-                                        echo "<td><a href='".site_url('Welcome/updateSectionList?id=').$row->section_id." ' target='_blank' class='btn btn-sm btn-primary'>Update</a></td>";
+                                        echo "<td><a href='".site_url('Welcome/updateSectionList?id=').$row->section_id." ' target='_blank' class='btn btn-sm btn-primary'>UPDATE</a></td>";
 
-                                        echo "<td><a href='".site_url('Welcome/deleteSectionList?id=').$row->section_id."' target='_blank' class='btn btn-sm btn-danger'>Delete</a></td>";
+                                        echo "<td><a href='".site_url('Welcome/deleteSectionList?id=').$row->section_id."' target='_blank' class='btn btn-sm btn-danger'>DELETE</a></td>";
                                 echo"</tr>";
                             }
                         }
