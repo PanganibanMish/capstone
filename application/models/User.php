@@ -158,6 +158,7 @@ class User extends CI_Model
 
 	public function get_Section_List()
 	{
+
 			$sql = $this->db->query("SELECT g.*, u.grade_level, CONCAT(u2.grade_level) as created_by, CONCAT(u3.grade_level) as modified_by FROM section g LEFT JOIN grade_level u ON g.grade_level = u.grade_id LEFT JOIN grade_level u2 ON g.created_by = u2.grade_id LEFT JOIN grade_level u3 ON g.modified_by = u3.grade_id")->result();
 			return $sql;
 	}

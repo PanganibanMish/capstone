@@ -500,7 +500,7 @@ class Welcome extends CI_Controller {
 		if($session_data = $this->session->userdata('set_session'))
 		{
 			$data['user_session'] = $session_data;
-			$data['getSectionList'] = $this->User->get_Section_List();
+			$data['getSectionList'] = $this->User->get_Section();
 			$data['getGradeList'] = $this->User->get_grade_level();
         	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
         	$this->load->view('administration/UpdateSection'); //loads view php files

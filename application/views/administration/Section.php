@@ -36,34 +36,7 @@
                         {
                             foreach ($getSectionList as $row)
                             {
-                                if($row->grade_level== '1')
-                                    $grade_level = 'Grade 1';
-                                else if($row->grade_level == '2')
-                                    $grade_level = 'Grade 2';
-                                else if($row->grade_level == '3')
-                                    $grade_level = 'Grade 3';
-                                else if($row->grade_level == '4')
-                                    $grade_level = 'Grade 4';
-                                else if($row->grade_level == '5')
-                                   $grade_level = 'Grade 5';
-                                else if($row->grade_level == '6')
-                                   $grade_level = 'Grade 6';
-                                else if($row->grade_level == '7')
-                                  $grade_level = 'Grade 7';
-                                else if($row->grade_level == '8')
-                                   $grade_level = 'Grade 8';
-                                else if($row->grade_level == '9')
-                                    $grade_level = 'Grade 9';
-                                else if($row->grade_level == '10')
-                                   $grade_level = 'Grade 10';
-                                else if($row->grade_level == '11')
-                                  $grade_level = 'Grade 11 - GAS';
-                                else if($row->grade_level == '12')
-                                   $grade_level = 'Grade 11 - HUMMS';
-                                else if($row->grade_level == '13')
-                                   $grade_level = 'Grade 12 - GAS';
-                                else 
-                                      $grade_level = 'Grade 12 - HUMMS';
+                                
                                         echo"<td>".$row->section_id."</td>";
                                         echo"<td>".$row->section_name."</td>";
                                         echo"<td>".$row->grade_level."</td>";
