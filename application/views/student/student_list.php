@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary">
-                    <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/addFaculty') ?>">
+                    <form class="form-horizontal" method="post" action="<?php echo site_url('Welcome/addStudents') ?>">
                         <div class="box-body">
                             <h3>Student Information</h3><hr>
                             <div class="form-group">
@@ -281,7 +281,7 @@
                         </div>
                         <div class="box-footer">
                             <button type="reset" class="btn btn-default">Reset</button>
-                            <button type="submit" class="btn btn-sm btn-primary pull-right">Create</button>
+                            <button type="submit" name="submit" class="btn btn-sm btn-primary pull-right">Create</button>
                         </div>
                     </form>
                 </div>
