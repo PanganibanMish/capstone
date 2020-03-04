@@ -656,6 +656,45 @@ class Welcome extends CI_Controller {
 
 		redirect('Welcome/AttendanceType','refresh');
 	}
+	public function password()
+	{
+		if($session_data = $this->session->userdata('set_session')) 
+		{
+			$data['user_session'] = $session_data;
+			$data['getUser'] = $this->User->get_user_list(); //hali sa model function na kinukua nya si userlist. Read ni.
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/password'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function changepasswords()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$new_password = $this->input->post('new_password'); //pang kua ning input data sa view
+			$confirm_password = $this->input->post('confirm_password');
+			$user_id = $session_data['user_id']; //get user_id from session
+			if($new_password == $confirm_password)
+			{
+				$data = $this->User->changepasswordModel($user_id, $new_password);//maduman ka sa model na user tapos hahanapon mo si function na processchangepassword_model($user_id, $new_password)
+				redirect('Welcome/home','refresh'); //redirect sa home
+			}
+			else
+			{
+				$this->session->set_flashdata('message', 'Password does not match'); //pag ma flash ning message sa view
+				redirect('Welcome/password','refresh');
+			}
+		}
+		else
+		{
+			redirect('Welcome','refresh');
+		}
+				//redirect('Welcome/changepassword','refresh');
+	}
 	public function logout()
 	{
 		session_destroy();

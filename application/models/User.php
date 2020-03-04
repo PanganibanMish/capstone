@@ -234,4 +234,17 @@ class User extends CI_Model
 		$this->db->where('id', $id);
 		 return $this->db->delete('attendance_type');
 	}
+	public function changepasswordModel($user_id, $new_password)
+	{
+		$data = array(
+						'password' => md5($new_password), //si $new_password nilalaag nya sa 'password'
+						'modified_by' => $user_id,
+					); //ini si mga babaguhon sa database
+		$this->db->where('user_id', $user_id); //kung nasain ang hinahanap na data
+		$this->db->update('user_list', $data); //update data
+		if($this->db->affected_rows() > 0) //tgchecheck niya kung pirang rows ang nabago sa database
+			return true;
+		else
+			return false;
+	}
 }
