@@ -30,7 +30,8 @@ class Student extends CI_Controller {
         {
             if(!empty($this->input->post('submit')))
             {
-                if($this->StudentModel->addStudentModel() == 1)
+                
+                if($this->StudentModel->addStudentModel($session_data['user_id']) == 1)
                 {
                     $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
                                                             <h4><i class="icon fa fa-check"></i> Yey!</h4>
@@ -44,13 +45,13 @@ class Student extends CI_Controller {
                                                         Failed in adding student.        
                                                     </div>');
                 }
-                redirect('Welcome/addStudents','refresh');
+                redirect('Student/addStudents','refresh');
             }
             else
             {
                 $data['user_session'] = $session_data;
                 $this->load->view('header', $data);
-                $this->load->view('student/student_list'); //loads view php files
+                $this->load->view('student/addStudent'); //loads view php files
                 $this->load->view('footer');
             }
         }

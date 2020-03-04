@@ -661,7 +661,6 @@ class Welcome extends CI_Controller {
 		if($session_data = $this->session->userdata('set_session')) 
 		{
 			$data['user_session'] = $session_data;
-			$data['getUser'] = $this->User->get_user_list(); //hali sa model function na kinukua nya si userlist. Read ni.
         	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
         	$this->load->view('administration/password'); //loads view php files
         	$this->load->view('footer');
@@ -681,7 +680,8 @@ class Welcome extends CI_Controller {
 			if($new_password == $confirm_password)
 			{
 				$data = $this->User->changepasswordModel($user_id, $new_password);//maduman ka sa model na user tapos hahanapon mo si function na processchangepassword_model($user_id, $new_password)
-				redirect('Welcome/home','refresh'); //redirect sa home
+				$this->session->set_flashdata('message', 'Password successfully changed'); //pag ma flash ning message sa view
+				redirect('Welcome/password','refresh'); //redirect sa home
 			}
 			else
 			{
