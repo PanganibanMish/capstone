@@ -297,14 +297,14 @@ class Welcome extends CI_Controller {
 		{
 			$data['session'] = $session_data;
 			$result = $this->User->saveChangesGradeListModel($data['session']['user_id']);
-			$grade_id = $this->input->post('grade_id');
+			$grade_level_id = $this->input->post('grade_level_id');
 			if($result == 0)
 			{
 				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
             												<h4><i class="icon fa fa-check"></i> Yey!</h4>
 											            		Grade List was successfully updated.      	
 											            </div>');
-				redirect('Welcome/updateGradeList?id='.$grade_id,'refresh');
+				redirect('Welcome/updateGradeList?id='.$grade_level_id,'refresh');
 			}
 			else
 			{
@@ -312,7 +312,7 @@ class Welcome extends CI_Controller {
         									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
 							            		Failed in updating Grade List.      	
 							            </div>');
-				redirect('Welcome/updateGradeList?id='.$grade_id,'refresh');
+				redirect('Welcome/updateGradeList?id='.$grade_level_id,'refresh');
 			}
 	    }
 	    else
@@ -322,8 +322,8 @@ class Welcome extends CI_Controller {
 	}
 	public function deleteGradeList()
 	{
-		$grade_id = $this->input->get('id');
-		$id = $this->User->deleteGradeList($grade_id);
+		$grade_level_id = $this->input->get('id');
+		$id = $this->User->deleteGradeList($grade_level_id);
 
 		redirect('Welcome/GradeList','refresh');
 	}
@@ -694,6 +694,107 @@ class Welcome extends CI_Controller {
 			redirect('Welcome','refresh');
 		}
 				//redirect('Welcome/changepassword','refresh');
+	}
+	public function ScheduleList()
+	{
+		if($session_data = $this->session->userdata('set_session')) 
+		{
+			$data['user_session'] = $session_data;
+			$data['getScheduleList'] = $this->User->get_Schedule_List(); //hali sa model function na kinukua nya si userlist. Read ni.
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/Schedule'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function createScheduleList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/addScheduleList'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function addSchedule()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->addScheduleModel();
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Schedule was successfully added.      	
+											            </div>');
+				redirect('Welcome/ScheduleList', 'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in adding Attendance Type.      	
+							            </div>');
+				redirect('Welcome/ScheduleList', 'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function updateScheduleList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+			$data['getScheduleList'] = $this->User->get_schedule();
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/updateScheduleList'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function savechangesScheduleList()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->savechangesScheduleListModel();
+			$id = $this->input->post('id');
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Schedule was successfully updated.      	
+											            </div>');
+				redirect('Welcome/updateScheduleList?id='.$id,'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in updating Schedule.      	
+							            </div>');
+				redirect('Welcome/updateScheduleList?id='.$id,'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
 	}
 	public function logout()
 	{

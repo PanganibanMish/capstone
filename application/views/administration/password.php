@@ -17,8 +17,7 @@
 </head>
 <body class="hold-transition login-page">
     <?php if($this->session->flashdata('message')) { //session na may alert hali sa controller/ ang message declared hali sa controller ?>
-        <div class="alert alert-danger alert-dismissible text-center">
-            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+        <div class="alert alert-info alert-dismissible text-center">
             <h5><?php echo $this->session->flashdata('message'); ?></h5>
         </div>
     <?php } ?>

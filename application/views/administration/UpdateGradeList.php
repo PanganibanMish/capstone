@@ -1,6 +1,6 @@
 <?php 
 
-    $grade_id = "";
+    $grade_level_id = "";
     $grade_level = "";
     $adviser = "";
   
@@ -8,7 +8,7 @@
         {
             foreach ($getGradeList as $row)
             {
-                $grade_id  = $row->grade_id;
+                $grade_level_id  = $row->grade_level_id;
                 $grade_level = $row->grade_level;
                 $adviser = $row->adviser;
             }
@@ -36,7 +36,7 @@
                                 <div class="col-sm-6">
                                     <label class="control-label">Grade Level</label>
                                     <input type="text" class="form-control" value='<?php echo $grade_level; ?>'required id="grade_level" name="grade_level" placeholder="Grade Level">
-                                    <input type="hidden" name="grade_id" class="form-control" value='<?php echo $grade_id; ?>'>
+                                    <input type="hidden" name="grade_level_id" class="form-control" value='<?php echo $grade_level_id; ?>'>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="adviser" class="col-sm-1 control-label">Adviser</label>

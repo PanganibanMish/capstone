@@ -84,8 +84,8 @@ class User extends CI_Model
 	}
 	public function get_grade_list()
 	{
-		$grade_id = $this->input->get('id');
-		$sql = $this->db->query("SELECT * FROM grade_level WHERE grade_id = '$grade_id'")->result();
+		$grade_level_id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM grade_level WHERE grade_level_id = '$grade_level_id'")->result();
 		return $sql;
 	}
 	public function addGradeListModel($user_id)
@@ -106,15 +106,15 @@ class User extends CI_Model
 								'adviser' =>$this->input->post('adviser'),
 								'modified_by'=>$user_id	
 							);
-		$grade_id = $this->input->post('grade_id');
-		$this->db->where('grade_id', $grade_id);
+		$grade_level_id = $this->input->post('grade_level_id');
+		$this->db->where('grade_level_id', $grade_level_id);
 		if($this->db->update('grade_level', $data_array) == true)
 			return 0;
 		return 1;
 	}
-	public function deleteGradeList($grade_id)
+	public function deleteGradeList($grade_level_id)
 	{
-		 $this->db->where('grade_id', $grade_id);
+		 $this->db->where('grade_level_id', $grade_level_id);
 		 return $this->db->delete('grade_level');
 	}
 	public function get_subject_list()
@@ -158,8 +158,7 @@ class User extends CI_Model
 
 	public function get_Section_List()
 	{
-
-			$sql = $this->db->query("SELECT g.*, u.grade_level, CONCAT(u2.grade_level) as created_by, CONCAT(u3.grade_level) as modified_by FROM section g LEFT JOIN grade_level u ON g.grade_level = u.grade_id LEFT JOIN grade_level u2 ON g.created_by = u2.grade_id LEFT JOIN grade_level u3 ON g.modified_by = u3.grade_id")->result();
+			$sql = $this->db->query("SELECT g.*, u.grade_level, CONCAT(u2.grade_level) as created_by, CONCAT(u3.grade_level) as modified_by FROM section g LEFT JOIN grade_level u ON g.grade_level = u.grade_level_id LEFT JOIN grade_level u2 ON g.created_by = u2.grade_level_id LEFT JOIN grade_level u3 ON g.modified_by = u3.grade_level_id")->result();
 			return $sql;
 	}
 	public function get_Section()
@@ -246,5 +245,53 @@ class User extends CI_Model
 			return true;
 		else
 			return false;
+	}
+	public function get_Schedule_List()
+	{
+			$sql = $this->db->query("SELECT g.*, u.grade_level_id, CONCAT(u2.grade_level_id) as created_by, CONCAT(u3.grade_level_id) as modified_by FROM schedule g LEFT JOIN grade_level u ON g.grade_level_id = u.grade_level_id LEFT JOIN schedule u ON g.grade_level_id = u.grade_level_id LEFT JOIN schedule u2 ON g.created_by = u2.grade_level_id LEFT JOIN schedule u3 ON G.modified_by = u3.grade_level_id")->result();
+			return $sql;
+					//$sql = $this->db->query("SELECT g.*, u.first_name, u.last_name, CONCAT(u2.first_name,' ',u2.last_name) as created_by, CONCAT(u3.first_name,' ',u3.last_name) as modified_by FROM grade_level g LEFT JOIN user_list u ON g.adviser = u.user_id LEFT JOIN user_list u2 ON g.created_by = u2.user_id LEFT JOIN user_list u3 ON g.modified_by = u3.user_id")->result();
+			//return $sql;
+	}
+	public function get_schedule()
+	{
+		$schedule_id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM schedule WHERE schedule_id= '$schedule_id'")->result();
+		return $sql;
+	}
+	public function addScheduleModel()
+	{
+			$data_array = array(
+								'school_year' => $this->input->post('school_year'),
+								'schedule_name' =>$this->input->post('schedule_name'),
+								'grade_level_id' =>$this->input->post('grade_level_id'),
+								'subject_id' =>$this->input->post('subject_id'),
+								'section_id' =>$this->input->post('section_id'),
+								'day' =>$this->input->post('day'),
+								'time_start' =>$this->input->post('time_start'),
+								'time_end' =>$this->input->post('time_end'),
+								'teacher' =>$this->input->post('teacher')
+							);
+		if($this->db->insert('schedule', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function savechangesScheduleListModel()
+	{
+		$data_array = array(
+								'school_year' => $this->input->post('school_year'),
+								'schedule_name' =>$this->input->post('schedule_name'),
+								'grade_level_id' =>$this->input->post('grade_level_id'),
+								'subject_id' =>$this->input->post('subject_id'),
+								'section_id' =>$this->input->post('section_id'),
+								'day' =>$this->input->post('day'),
+								'time_start' =>$this->input->post('time_start'),
+								'time_end' =>$this->input->post('time_end'),
+								'teacher' =>$this->input->post('teacher')
+							
+							);
+		if($this->db->update('schedule', $data_array) == true)
+			return 0;
+		return 1;
 	}
 }
