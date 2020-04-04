@@ -5,7 +5,6 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-
         $this->load->library('form_validation');
 
 		if($session_data = $this->session->userdata('set_session'))
