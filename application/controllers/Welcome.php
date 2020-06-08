@@ -296,14 +296,14 @@ class Welcome extends CI_Controller {
 		{
 			$data['session'] = $session_data;
 			$result = $this->User->saveChangesGradeListModel($data['session']['user_id']);
-			$grade_level_id = $this->input->post('grade_level_id');
+			$grade_id = $this->input->post('grade_id');
 			if($result == 0)
 			{
 				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
             												<h4><i class="icon fa fa-check"></i> Yey!</h4>
 											            		Grade List was successfully updated.      	
 											            </div>');
-				redirect('Welcome/updateGradeList?id='.$grade_level_id,'refresh');
+				redirect('Welcome/updateGradeList?id='.$grade_id,'refresh');
 			}
 			else
 			{
@@ -311,7 +311,7 @@ class Welcome extends CI_Controller {
         									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
 							            		Failed in updating Grade List.      	
 							            </div>');
-				redirect('Welcome/updateGradeList?id='.$grade_level_id,'refresh');
+				redirect('Welcome/updateGradeList?id='.$grade_id,'refresh');
 			}
 	    }
 	    else
@@ -321,8 +321,8 @@ class Welcome extends CI_Controller {
 	}
 	public function deleteGradeList()
 	{
-		$grade_level_id = $this->input->get('id');
-		$id = $this->User->deleteGradeList($grade_level_id);
+		$grade_id = $this->input->get('id');
+		$id = $this->User->deleteGradeList($grade_id);
 
 		redirect('Welcome/GradeList','refresh');
 	}
@@ -794,6 +794,225 @@ class Welcome extends CI_Controller {
         {
         	redirect('Welcome','refresh');
         }
+	}
+	public function RegistrarAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session')) 
+		{
+			$data['user_session'] = $session_data;
+			$data['getRegistrarAnnouncement'] = $this->User->get_registrar_announcement(); //hali sa model function na kinukua nya si userlist. Read ni.
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/Registrar_Announcement'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function createRegistrarAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/addRegistrarAnnouncement'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function addRegistrarAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->addRegistrarAnnouncementModel();
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Registrar Announcement was successfully added.      	
+											            </div>');
+				redirect('Welcome/RegistrarAnnouncement', 'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in adding Registrar Announcement.      	
+							            </div>');
+				redirect('Welcome/RegistrarAnnouncement', 'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function updateRegistrarAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+			$data['getRegistrarAnnouncement'] = $this->User->get_announcementlist();
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/updateRegistrarAnnouncement'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function savechangesRegistrarAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->savechangesRegistrarAnnouncementModel();
+			$id = $this->input->post('id');
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Announcement was successfully updated.      	
+											            </div>');
+				redirect('Welcome/updateRegistrarAnnouncement?id='.$id,'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in updating Announcement.      	
+							            </div>');
+				redirect('Welcome/updateRegistrarAnnouncement?id='.$id,'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function deleteRegistrarAnnouncement()
+	{
+			$id = $this->input->get('id');
+			$id = $this->User->deleteRegistrarAnnouncementModel($id);
+
+		redirect('Welcome/RegistrarAnnouncement','refresh');
+
+	}
+	public function TeacherAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session')) 
+		{
+			$data['user_session'] = $session_data;
+			$data['getTeacherAnnouncement'] = $this->User->get_teacher_announcement(); //hali sa model function na kinukua nya. Read ni.
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/Teacher_Announcement'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function createTeacherAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['student_profile'] = $this->User->get_student_profile();
+			$data['user_session'] = $session_data;
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/addTeacherAnnouncement'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function addTeacherAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->addTeacherAnnouncementModel($data['session']['student_id']);
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Teacher Announcement was successfully added.      	
+											            </div>');
+				redirect('Welcome/TeacherAnnouncement', 'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in adding Teacher Announcement.      	
+							            </div>');
+				redirect('Welcome/TeacherAnnouncement', 'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function updateTeacherAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['user_session'] = $session_data;
+			$data['getTeacherAnnouncement'] = $this->User->get_teacher_announcementlist();
+			$data['student_profile'] = $this->User->get_student_profileList();
+        	$this->load->view('header', $data); //nagviview ning data (userlist, session data) paduman view.
+        	$this->load->view('administration/updateTeacherAnnouncement'); //loads view php files
+        	$this->load->view('footer');
+        }
+        else
+        {
+        	redirect('Welcome','refresh');
+        } 
+	}
+	public function savechangesTeacherAnnouncement()
+	{
+		if($session_data = $this->session->userdata('set_session'))
+		{
+			$data['session'] = $session_data;
+			$result = $this->User->savechangesTeacherAnnouncementModel($data['session']['student_id']);
+			$announcement_id = $this->input->post('announcement_id');
+			if($result == 0)
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible text-center">
+            												<h4><i class="icon fa fa-check"></i> Yey!</h4>
+											            		Announcement was successfully updated.      	
+											            </div>');
+				redirect('Welcome/updateTeacherAnnouncement?id='.$announcement_id,'refresh');
+			}
+			else
+			{
+				$this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible text-center">
+        									<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+							            		Failed in updating Announcement.      	
+							            </div>');
+				redirect('Welcome/updateTeacherAnnouncement?id='.$announcement_id,'refresh');
+			}
+	    }
+	    else
+        {
+        	redirect('Welcome','refresh');
+        }
+	}
+	public function deleteTeacherAnnouncement()
+	{
+			$announcement_id = $this->input->get('id');
+			$id = $this->User->deleteTeacherAnnouncementModel($announcement_id);
+
+		redirect('Welcome/TeacherAnnouncement','refresh');
 	}
 	public function logout()
 	{

@@ -331,9 +331,11 @@
             <li class="active"><a href="<?php echo site_url('Welcome/Faculty');?>"><i class="fa fa-circle-o"></i>Faculty</a></li>
             <li><a href="<?php echo site_url('Welcome/GradeList');?>"><i class="fa fa-circle-o"></i>Grade List</a></li>
             <li><a href="<?php echo site_url('Welcome/SubjectList');?>"><i class="fa fa-circle-o"></i>Subject List</a></li>
-             <li><a href="<?php echo site_url('Welcome/SectionList');?>"><i class="fa fa-circle-o"></i>Section List</a></li>
-             <li><a href="<?php echo site_url('Welcome/AttendanceType');?>"><i class="fa fa-circle-o"></i>Attendance Type</a></li>
-              <li><a href="<?php echo site_url('Welcome/ScheduleList');?>"><i class="fa fa-circle-o"></i>Schedule List</a></li>
+            <li><a href="<?php echo site_url('Welcome/SectionList');?>"><i class="fa fa-circle-o"></i>Section List</a></li>
+            <li><a href="<?php echo site_url('Welcome/AttendanceType');?>"><i class="fa fa-circle-o"></i>Attendance Type</a></li>
+            <li><a href="<?php echo site_url('Welcome/ScheduleList');?>"><i class="fa fa-circle-o"></i>Schedule List</a></li>
+            <li><a href="<?php echo site_url('Welcome/RegistrarAnnouncement');?>"><i class="fa fa-circle-o"></i>Registrar Announcement</a></li>
+            <li><a href="<?php echo site_url('Welcome/TeacherAnnouncement');?>"><i class="fa fa-circle-o"></i>Teacher Announcement</a></li>
           </ul>
         </li>
         <li class="active treeview">

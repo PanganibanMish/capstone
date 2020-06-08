@@ -84,8 +84,8 @@ class User extends CI_Model
 	}
 	public function get_grade_list()
 	{
-		$grade_level_id = $this->input->get('id');
-		$sql = $this->db->query("SELECT * FROM grade_level WHERE grade_level_id = '$grade_level_id'")->result();
+		$grade_id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM grade_level WHERE grade_id = '$grade_id'")->result();
 		return $sql;
 	}
 	public function addGradeListModel($user_id)
@@ -106,15 +106,15 @@ class User extends CI_Model
 								'adviser' =>$this->input->post('adviser'),
 								'modified_by'=>$user_id	
 							);
-		$grade_level_id = $this->input->post('grade_level_id');
-		$this->db->where('grade_level_id', $grade_level_id);
+		$grade_level_id = $this->input->post('grade_id');
+		$this->db->where('grade_id', $grade_id);
 		if($this->db->update('grade_level', $data_array) == true)
 			return 0;
 		return 1;
 	}
-	public function deleteGradeList($grade_level_id)
+	public function deleteGradeList($grade_id)
 	{
-		 $this->db->where('grade_level_id', $grade_level_id);
+		 $this->db->where('grade_id', $grade_id);
 		 return $this->db->delete('grade_level');
 	}
 	public function get_subject_list()
@@ -158,7 +158,7 @@ class User extends CI_Model
 
 	public function get_Section_List()
 	{
-			$sql = $this->db->query("SELECT g.*, u.grade_level, CONCAT(u2.grade_level) as created_by, CONCAT(u3.grade_level) as modified_by FROM section g LEFT JOIN grade_level u ON g.grade_level = u.grade_level_id LEFT JOIN grade_level u2 ON g.created_by = u2.grade_level_id LEFT JOIN grade_level u3 ON g.modified_by = u3.grade_level_id")->result();
+			$sql = $this->db->query("SELECT g.*, u.grade_level, CONCAT(u2.grade_level) as created_by, CONCAT(u3.grade_level) as modified_by FROM section g LEFT JOIN grade_level u ON g.grade_level = u.grade_id LEFT JOIN grade_level u2 ON g.created_by = u2.grade_id LEFT JOIN grade_level u3 ON g.modified_by = u3.grade_id")->result();
 			return $sql;
 	}
 	public function get_Section()
@@ -293,5 +293,104 @@ class User extends CI_Model
 		if($this->db->update('schedule', $data_array) == true)
 			return 0;
 		return 1;
+	}
+	public function get_registrar_announcement()
+	{
+		$sql = $this->db->query("SELECT * FROM registrar_announcement")->result(); 
+		return $sql;
+	}
+	public function get_announcementlist()
+	{
+		$id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM registrar_announcement WHERE id = '$id'")->result();
+		return $sql;
+	}
+	public function addRegistrarAnnouncementModel()
+	{
+		$data_array = array(
+								'announcement_name' => $this->input->post('announcement_name'),
+								'announcement_details' =>$this->input->post('announcement_details'),
+								'date' =>$this->input->post('date')
+							);
+		if($this->db->insert('registrar_announcement', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function savechangesRegistrarAnnouncementModel()
+	{
+		$data_array = array(
+								'announcement_name' => $this->input->post('announcement_name'),
+								'announcement_details' =>$this->input->post('announcement_details'),
+								'date' =>$this->input->post('date')
+							);
+		$id = $this->input->post('id');
+		$this->db->where('id', $id);
+		if($this->db->update('registrar_announcement', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function deleteRegistrarAnnouncementModel($id)
+	{
+		$this->db->where('id', $id);
+		 return $this->db->delete('registrar_announcement');
+	}
+	public function get_teacher_announcement()
+	{
+			$sql = $this->db->query("SELECT g.*, u.student_id, CONCAT(u2.student_id) as created_by, CONCAT(u3.student_id) as modified_by FROM teacher_announcement g LEFT JOIN student_profile u ON g.student_id = u.id LEFT JOIN student_profile u2 ON g.created_by = u2.id LEFT JOIN student_profile u3 ON g.modified_by = u3.id")->result();
+			return $sql;
+	}
+	public function get_teacher_announcementlist()
+	{
+		$announcement_id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM teacher_announcement WHERE announcement_id = '$announcement_id'")->result();
+		return $sql;
+	}
+	public function addTeacherAnnouncementModel($id)
+	{
+		$data_array = array(
+								'student_id' => $this->input->post('student_id'),
+								'details' =>$this->input->post('details'),
+								'target_date' =>$this->input->post('target_date'),
+								'time_start' =>$this->input->post('time_start'),
+								'time_end' =>$this->input->post('time_end'),
+								'remarks' =>$this->input->post('remarks'),
+								'created_by' =>$id
+							);
+		if($this->db->insert('teacher_announcement', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function savechangesTeacherAnnouncementModel($id)
+	{
+		$data_array = array(
+								'student_id' => $this->input->post('student_id'),
+								'details' =>$this->input->post('details'),
+								'target_date' =>$this->input->post('target_date'),
+								'time_start' =>$this->input->post('time_start'),
+								'time_end' =>$this->input->post('time_end'),
+								'remarks' =>$this->input->post('remarks'),
+								'created_by' =>$id
+							);
+		$announcement_id = $this->input->post('announcement_id');
+		$this->db->where('announcement_id', $announcement_id);
+		if($this->db->update('announcement_id', $data_array) == true)
+			return 0;
+		return 1;
+	}
+	public function deleteTeacherAnnouncementModel($announcement_id)
+	{
+		$this->db->where('announcement_id', $announcement_id);
+		 return $this->db->delete('teacher_announcement');
+	}
+	public function get_student_profile()
+	{
+			$sql = $this->db->query("SELECT * FROM student_profile")->result(); //kunon mo gabos ning user data sa table na userlist
+			return $sql;
+	}
+	public function get_student_profileList()
+	{
+		$id = $this->input->get('id');
+		$sql = $this->db->query("SELECT * FROM student_profile WHERE id = '$id'")->result();
+		return $sql;
 	}
 }

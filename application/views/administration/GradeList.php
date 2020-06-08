@@ -37,7 +37,7 @@
                             foreach ($getGradeList as $row)
                             {
                                 echo"<tr>";
-                                   echo"<td>".$row->grade_level_id."</td>";
+                                   echo"<td>".$row->grade_id."</td>";
                                     echo"<td>".$row->grade_level."</td>";
                                     echo "<td>".$row->last_name.",".$row->first_name."</td>";
                                     echo"<td>".$row->date_created."</td>";
@@ -45,9 +45,9 @@
                                     echo"<td>".$row->date_modified."</td>";
                                     echo"<td>".$row->modified_by."</td>";
 
-                                    echo "<td><a href='".site_url('Welcome/updateGradeList?id=').$row->grade_level_id." ' target='_blank' class='btn btn-sm btn-primary'>UPDATE</a></td>";
+                                    echo "<td><a href='".site_url('Welcome/updateGradeList?id=').$row->grade_id." ' target='_blank' class='btn btn-sm btn-primary'>UPDATE</a></td>";
 
-                                    echo "<td><a href='".site_url('Welcome/deleteGradeList?id=').$row->grade_level_id."' target='_blank' class='btn btn-sm btn-danger'>DELETE</a></td>";
+                                    echo "<td><a href='".site_url('Welcome/deleteGradeList?id=').$row->grade_id."' target='_blank' class='btn btn-sm btn-danger'>DELETE</a></td>";
                             echo"</tr>";
                             }
                         }
